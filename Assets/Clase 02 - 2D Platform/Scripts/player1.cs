@@ -10,9 +10,10 @@ public class player1 : MonoBehaviour
     public bool isGrounded = true;
 
     private Rigidbody2D playerRb;
-    
+    private Animator playerAnim;
     void Start()
     {
+        playerAnim = GetComponent<Animator>();
         playerRb = GetComponent<Rigidbody2D>();
     }
 
@@ -27,15 +28,22 @@ public class player1 : MonoBehaviour
         {
             playerRb.AddForce(Vector3.up * jump);
             isGrounded = false;
+            playerAnim.SetBool("jump", true);
+        }
+
+        if (movX == 0) {
+            playerAnim.SetBool("run", false);
         }
 
         if (movX > 0)
         {
-            transform.localScale = new Vector3(1f, 2f, 1f);
+            playerAnim.SetBool("run", true);
+            transform.localScale = new Vector3(5f, 5f, 1f);
         }
         if (movX < 0)
         {
-            transform.localScale = new Vector3(-1f, 2f, 1f);
+            playerAnim.SetBool("run", true);
+            transform.localScale = new Vector3(-5f, 5f, 1f);
         }
 
     }
@@ -44,6 +52,7 @@ public class player1 : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("ground"))
         {
+            playerAnim.SetBool("jump", false);
             isGrounded = true;
         }
     }
