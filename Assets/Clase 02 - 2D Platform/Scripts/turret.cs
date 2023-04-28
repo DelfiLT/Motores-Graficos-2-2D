@@ -6,6 +6,7 @@ using UnityEngine;
 public class turret : MonoBehaviour
 {
     public GameObject player;
+    public GameObject particlePfab;
     public float distanceBeetween;
     private float timer;
     public GameObject bullet;
@@ -44,11 +45,13 @@ public class turret : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("bullet"))
+        if (collision.gameObject.CompareTag("bullet"))
         {
-            Destroy(gameObject);
+            GameObject particleVFX = Instantiate(particlePfab, transform.position, Quaternion.identity);
+            Destroy(particleVFX, 2f);
+            Destroy(this.gameObject);
         }
     }
 }

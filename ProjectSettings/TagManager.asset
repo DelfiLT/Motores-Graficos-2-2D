@@ -9,6 +9,7 @@ TagManager:
   - bullet
   - shoot
   - enemy
+  - ship
   layers:
   - Default
   - TransparentFX

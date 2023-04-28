@@ -21,7 +21,6 @@ public class player1 : MonoBehaviour
         playerRb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         float movX = Input.GetAxis("Horizontal") * velocity;
@@ -86,7 +85,15 @@ public class player1 : MonoBehaviour
             playerAnim.SetBool("jump", false);
         }
 
-        if(collision.gameObject.CompareTag("enemy"))
+        if(collision.gameObject.CompareTag("enemy") || collision.gameObject.CompareTag("mapEnd"))
+        {
+            SceneManager.LoadScene("End");
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("ship"))
         {
             SceneManager.LoadScene("End");
         }

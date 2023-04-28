@@ -6,6 +6,7 @@ using UnityEngine;
 public class drone : MonoBehaviour
 {
     public GameObject player;
+    public GameObject particlePfab;
     public float speed;
     public float distanceBeetween;
 
@@ -30,7 +31,9 @@ public class drone : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("bullet"))
         {
-            Destroy(gameObject);
+            GameObject particleVFX = Instantiate(particlePfab, transform.position, Quaternion.identity);
+            Destroy(particleVFX, 2f);
+            Destroy(this.gameObject);
         }
     }
 }
